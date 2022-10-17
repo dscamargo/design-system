@@ -1,0 +1,19 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+import { fontSizes, fontWeights, fontFamily } from './index'
+
+export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+<Meta title="Tokens/Typography" />
+
+# Typography
+
+**Font:** Inter
+
+**Weights:** 400(regular), 500 (semi bold), 700(bold)
+
+<Typeset
+  fontSizes={Object.keys(fontSizes).map(item => Number(fontSizes[item]))}
+  fontWeight={fontWeights.bold}
+  sampleText={SampleText}
+  fontFamily={fontFamily}
+/>
