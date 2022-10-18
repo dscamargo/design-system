@@ -1,0 +1,27 @@
+name: Deploy Storybook
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build lib
+        run: yarn build
+
+      - name: Remove unused files
+        run: find  . -type f ! -name "dist" ! -name "package.json" ! -name "yarn.lock" -print
