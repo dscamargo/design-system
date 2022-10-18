@@ -12,6 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
@@ -29,13 +32,13 @@ jobs:
         with:
           file: package.json
           field: version
-          value: ${{ steps.semantic_release_info.outputs.git_tag }}
+          value: ${{ env.RELEASE_VERSION }}
 
       - name: Prepare files
         run: cp yarn.lock dist && cp package.json dist
 
-      - name: List files
-        run: ls -la dist
+      - name: Get package.json content
+        run: cat dist/package.json
 
       - name: Publish package on NPM 📦
         run: npm publish --access public dist/
