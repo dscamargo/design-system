@@ -1,9 +1,9 @@
 name: Publish npm package
 
 on:
-  push:
-    branches:
-      - 'master'
+  release:
+    types:
+    - created
 
 jobs:
   publish-npm:
@@ -32,7 +32,7 @@ jobs:
         with:
           file: package.json
           field: version
-          value: v0.0.2
+          value: $RELEASE_VERSION
 
       - name: Prepare files
         run: cp yarn.lock dist && cp package.json dist
