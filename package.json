@@ -4,9 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "description": "Lib de componentes para utilização em projetos React",
+  "repository": {
+    "url": "https://github.com/dscamargo/design-system",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/dscamargo/design-system/issues"
+  },
+  "author": {
+    "email": "me@dscamargo.com",
+    "name": "Douglas Simon Camargo",
+    "url": "https://dscamargo.com"
+  },  
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "build": "tsup src/index.ts --format esm,cjs --dts && cp yarn.lock dist && cp package.json dist",
     "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
     "release": "npm publish dist",
     "storybook": "start-storybook -p 6006",

@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build lib
-        run: yarn build
-
       - name: Update package.json version
         uses: jossef/action-set-json-field@v2
         with:
@@ -34,11 +31,8 @@ jobs:
           field: version
           value: ${{ env.RELEASE_VERSION }}
 
-      - name: Prepare files
-        run: cp yarn.lock dist && cp package.json dist
-
-      - name: Get package.json content
-        run: cat dist/package.json
+      - name: Build lib
+        run: yarn build
 
       - name: Publish package on NPM 📦
         run: npm publish --access public dist/
