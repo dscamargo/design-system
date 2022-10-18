@@ -32,7 +32,7 @@ jobs:
         with:
           file: package.json
           field: version
-          value: $RELEASE_VERSION
+          value: v0.0.2
 
       - name: Prepare files
         run: cp yarn.lock dist && cp package.json dist
@@ -40,7 +40,7 @@ jobs:
       - name: List files
         run: ls -la dist
 
-      # - name: Publish package on NPM 📦
-      #   run: npm publish dist
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish package on NPM 📦
+        run: npm publish --access public dist/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
